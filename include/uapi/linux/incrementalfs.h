@@ -26,7 +26,7 @@
  */
 #define INCFS_MAGIC_NUMBER (0x5346434e49ul & ULONG_MAX)
 
-#define INCFS_DATA_FILE_BLOCK_SIZE 4096
+#define INCFS_DATA_FILE_BLOCK_SIZE PAGE_SIZE
 #define INCFS_HEADER_VER 1
 
 /* TODO: This value is assumed in incfs_copy_signature_info_from_user to be the

@@ -16,7 +16,7 @@ TARGET_DEFCONFIG=${1:-mt6989_defconfig}
 cd "$(dirname "$0")"
 
 
-LOCALVERSION=-android14-Kokuban-Exusiai-TEACAET-
+LOCALVERSION=-android14-TEACAET
 
 ARGS="
 CC=clang
@@ -44,7 +44,7 @@ if [ ! -d AnyKernel3 ]; then
   git clone --depth=1 https://github.com/YuzakiKokuban/AnyKernel3.git -b mt6989
 fi
 cp arch/arm64/boot/Image AnyKernel3/zImage
-name=TabS10_kernel_`cat include/config/kernel.release`_`date '+%Y_%m_%d'`
+name=kernel_`cat include/config/kernel.release`_`date '+%Y_%m_%d'`
 cd AnyKernel3
 zip -r ${name}.zip * -x *.zip
 cd ..

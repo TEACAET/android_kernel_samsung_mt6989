@@ -43,17 +43,8 @@ cd out
 if [ ! -d AnyKernel3 ]; then
   git clone --depth=1 https://github.com/YuzakiKokuban/AnyKernel3.git -b mt6989
 fi
-cp arch/arm64/boot/Image AnyKernel3/zImage
-name=kernel_`cat include/config/kernel.release`_`date '+%Y_%m_%d'`
-cd AnyKernel3
-zip -r ${name}.zip * -x *.zip
-cd ..
-cp arch/arm64/boot/Image AnyKernel3/tools/kernel
-cd AnyKernel3/tools
-chmod +x libmagiskboot.so
-lz4 boot.img.lz4
-./libmagiskboot.so repack boot.img ${name}.img 
-echo "boot.img output to $(realpath $name).img"
-cd ..
-cd ..
-echo "AnyKernel3 package output to $(realpath $name).zip"
+ cp arch/arm64/boot/Image AnyKernel3/zImage
+ name=${TARGET_DEFCONFIG%%_defconfig}_kernel_`cat include/config/kernel.release`_`date '+%Y_%m_%d'`
+ cd AnyKernel3
+ zip -r ${name}.zip * -x *.zip
+ echo "AnyKernel3 package output to $(realpath $name).zip"

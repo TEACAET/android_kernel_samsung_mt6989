@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
 /*
- * Copyright (c) Facebook, Inc.
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
  * All rights reserved.
  *
  * This source code is licensed under both the BSD-style license (found in the
@@ -65,6 +65,12 @@ size_t zstd_dstream_workspace_bound(size_t max_window_size)
 }
 EXPORT_SYMBOL(zstd_dstream_workspace_bound);
 
+size_t ZSTD_DStreamWorkspaceBound(size_t max_window_size)
+{
+	return zstd_dstream_workspace_bound(max_window_size);
+}
+EXPORT_SYMBOL(ZSTD_DStreamWorkspaceBound);
+
 zstd_dstream *zstd_init_dstream(size_t max_window_size, void *workspace,
 	size_t workspace_size)
 {
@@ -77,7 +83,7 @@ EXPORT_SYMBOL(zstd_init_dstream);
 
 size_t zstd_reset_dstream(zstd_dstream *dstream)
 {
-	return ZSTD_resetDStream(dstream);
+	return ZSTD_DCtx_reset(dstream, ZSTD_reset_session_only);
 }
 EXPORT_SYMBOL(zstd_reset_dstream);
 
